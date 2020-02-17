@@ -1,3 +1,6 @@
 middleware - 처리가 끝날때까지 연결되어 있는것
 express에서 모든 함수는 미들웨어가 될수 있다.
 user와 end 사이에 원하는 만큼 넣을수 있다.
+
+morgan - logger middleware
+helmet - secure middleware
