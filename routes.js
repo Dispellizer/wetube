@@ -7,7 +7,7 @@ const SEARCH = "/search";
 
 // Users
 const USERS = "/users";
-const USER_DETAIL = "/:id/";
+const USER_DETAIL = "/:id";
 const EDIT_PROFILE = "/edit-profile";
 const CHANGE_PASSWORD = "/change-password";
 
@@ -18,7 +18,7 @@ const VIDEO_DETAIL = "/:id";
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
 
-const routers = {
+const routes = {
   home: HOME,
   join: JOIN,
   login: LOGIN,
@@ -35,4 +35,4 @@ const routers = {
   deleteVideo: DELETE_VIDEO
 };
 
-export default routers;
+export default routes;
