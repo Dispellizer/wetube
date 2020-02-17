@@ -1,6 +1,21 @@
+babel - es6+ 코드를 es5 이하 버전으로 트랜스 파일링 해준다.
+구형 브라우저에서 지원하지 않는 코드를 IE나 구형 브라우저에서 동작하도록 만들기 위해서
+ES6+코드를 ES5이하 버전으로 변환 해준다.
+
 middleware - 처리가 끝날때까지 연결되어 있는것
 express에서 모든 함수는 미들웨어가 될수 있다.
 user와 end 사이에 원하는 만큼 넣을수 있다.
 
 morgan - logger middleware
 helmet - secure middleware
+cookie-parser - 요청된 쿠키를 쉽게 추출할 수 있도록 해주는 미들웨어
+body-parser - 클라이언트 POST requset data의 body로부터 파리미터를 편리하게 추출해준다.
+
+export default app;
+import app from "./app.js";
+
+export const userRouter = express.RouteR();
+import { userRouter } from "./router.js";
+
+app.use("/user", userRouter);
+app.use에서 use는 이 router전체를 사용하겠다는 의미다
