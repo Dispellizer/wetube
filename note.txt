@@ -44,3 +44,14 @@ lalala = () => {
 
 대괄호가 없으면 암시적으로 return해주지만,
 대괄호를 넣어주면 return 하지 않는다.
+
+pug에서 텍스트 사이에 자바스크립트를 추가해주고 싶다면
+#{}사이에 넣어주면 된다.
+
+layout을 통하여 반복되는 부분을 최소화 할수 있다.
+block content를 통하여 원하는 부분만 변화게 할수있다.
+
+extends layouts/main
+
+block content
+    p join
