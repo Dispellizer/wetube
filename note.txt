@@ -92,3 +92,6 @@ const {
 res.render("search", { pageTitle: "Search", searchingBy });
 
 get요청을 보냈을때 해당하는 컨트롤러만 있을때 mtehod="post"를 해주면 에러가 난다.
+
+User Detail라고 뜬 이유는 /edit-profile을 /:id 로 인식해서 그렇다.
+userRouter에 가서 순서를 바꿔주면 된다.(editProfile, changePassword가 더 위에 오도록)
