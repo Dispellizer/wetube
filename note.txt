@@ -141,3 +141,38 @@ block content
                 views: item.views,
                 videoFile: item.videoFile
             })
+
+globalRouter.get(routes.join, getJoin);
+globalRouter.post(routes.join, postJoin);
+get과 post를 따로 만들어 줘야 한다.
+
+res.status(400);
+status는 http 상태 코드를 나타낸다
+400은 Bad requset이다
+
+Profile을 검사해보면 user/:id가 아닌 user/5 이런식으로 나오게 하고싶다
+미들웨어에 설정된 id가 url에 들어가도록 할려면 routes를 수정해야한다.
+express는 이해하지만 html은 저 routes를 이해하지 못하기 때문이다.
+
+userDetail을 함수로 바꿔야 한다.
+userDetail: USER_DETAIL
+
+이 함수는 id를 인자로 받는다, id가 있다면 /users/${id}를 리턴한다.
+  userDetail: id => {
+    if (id) {
+      return `/users/${id}`;
+    } else {
+      return USER_DETAIL;
+    }
+  },
+
+userRouter도 수정해야한다.
+선언만 해두면 안되고, 실제로 함수를 실행해야 한다.
+userRouter.get(routes.userDetail, userDetail); --> 
+userRouter.get(routes.userDetail(), userDetail);
+이 경우에는 id를 인자로 해서 실행하지 않으니 /:id를 리턴 받는다.
+
+하지만 템플릿에서는 인자 없이 실행하면 안된다.
+a(href=routes.userDetail) Profile -->
+a(href=routes.userDetail(user.id)) Profile
+user.id를 입력해줘야 한다.
