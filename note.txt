@@ -95,3 +95,17 @@ get요청을 보냈을때 해당하는 컨트롤러만 있을때 mtehod="post"�
 
 User Detail라고 뜬 이유는 /edit-profile을 /:id 로 인식해서 그렇다.
 userRouter에 가서 순서를 바꿔주면 된다.(editProfile, changePassword가 더 위에 오도록)
+
+express는 /:id/edit을 이해할수 있지만 링크는 /videos/:id/delete로 그대로 표시됨
+id의 값이 변해야 하는데 변하지 않는다 이를 해결해야함
+
+homeController에서 videos 배열 전달하기
+import { videos } from "../db";
+export const home = (req, res) => {
+  res.render("home", { pageTitle: "Home", videos });
+};
+
+videos배열에서 하나씩 template를 적용시킴
+each video in videos
+    h1= video.title
+    p= item.discription
