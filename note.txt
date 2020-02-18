@@ -90,3 +90,5 @@ const {
 } = req;
 
 res.render("search", { pageTitle: "Search", searchingBy });
+
+get요청을 보냈을때 해당하는 컨트롤러만 있을때 mtehod="post"를 해주면 에러가 난다.
