@@ -109,3 +109,35 @@ videos배열에서 하나씩 template를 적용시킴
 each video in videos
     h1= video.title
     p= item.discription
+
+mixin
+mixin은 웹사이에트에서 자주 반복되는 코드를 담고있다.
+
+each item in videos
+    +videoBlock({
+        title: item.title,
+        description: item.description
+    })
+이 정보들이 videoBlock으로 전달되어서 
+mixin videoBlock(video = {})
+    h1=video.title
+    p=video.description
+이 함수를 실행시킨다.
+그리고 그 함수는 html로 내보낸다.
+
+각각 다른 정보를 가지지만 같은 구조를 가지는 데이터를 표시하기 위한 코드를 캡슐화 했다.
+이게 mixin을 사용하는 이유다. 다른정보, 같은구조
+mixin videoBlock(video = {})
+    .videoBlock
+        video.videoBlock__thumbnail(src=video.videoFile, controls=true)
+        h4.videoBlock__title=video.title
+        h6.videoBlock__views=video.views
+
+block content
+    .videos
+        each item in videos
+            +videoBlock({
+                title: item.title,
+                views: item.views,
+                videoFile: item.videoFile
+            })

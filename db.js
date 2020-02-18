@@ -2,9 +2,10 @@ export const videos = [
   {
     id: 332443,
     title: "Video awesome",
-    discription: "This is something I love",
+    description: "This is something I love",
     views: 24,
-    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    videoFile:
+      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
     creators: {
       id: 453421,
       name: "Dispellizer",
@@ -14,9 +15,10 @@ export const videos = [
   {
     id: 43534,
     title: "Video super",
-    discription: "This is something I love",
+    description: "This is something I love",
     views: 24,
-    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    videoFile:
+      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
     creators: {
       id: 453421,
       name: "Dispellizer",
@@ -26,9 +28,10 @@ export const videos = [
   {
     id: 565643,
     title: "Video nice",
-    discription: "This is something I love",
+    description: "This is something I love",
     views: 24,
-    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    videoFile:
+      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
     creators: {
       id: 453421,
       name: "Dispellizer",
@@ -38,9 +41,10 @@ export const videos = [
   {
     id: 11111,
     title: "Video perfact",
-    discription: "This is something I love",
+    description: "This is something I love",
     views: 24,
-    videoFile: "https://archive.org/details/BigBuckBunny_124",
+    videoFile:
+      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
     creators: {
       id: 453421,
       name: "Dispellizer",
