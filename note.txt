@@ -218,3 +218,17 @@ const db = mongoose.connection;
 db.once("open", handleOpen);
 once는 한번만 실행시키는것, 성공여부를 확인할수 있는 function을 만듬
 const handleOpen = () => console.log("✅ Connected to DB");
+
+init에  import "./db";  추가
+
+dotenv
+가끔 어떤 부분을 숨기고 싶을때
+localhost에 db가 설치되어 있지만 다른곳에 설치된다면 어떨까?
+코드에 있는 url로부터 유저 데이터를 보는걸 원하지 않는다
+
+opensource프로젝트에서 db를 숨기고 싶을때 dotenv사용
+
+dotenv.config 라는 함수로 .env 파일 엔에 있는 정보를 불러올 수 있다.
+그리고 찾은 모든 variable 들을 process.env.key에 저장한다.
+
+.env 파일을 .gitignore 파일에 추가해서 ignore하는걸 잊지마
