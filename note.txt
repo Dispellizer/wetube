@@ -232,3 +232,50 @@ dotenv.config 라는 함수로 .env 파일 엔에 있는 정보를 불러올 수
 그리고 찾은 모든 variable 들을 process.env.key에 저장한다.
 
 .env 파일을 .gitignore 파일에 추가해서 ignore하는걸 잊지마
+
+MongoDB의 장점은 document를 줄여준다는것
+MongoDB의 파일이 어떻게 생겼는지 알려줘야한다.(Model의 형태)
+
+models란 폴더 생성후 Video.js를 만들어준다.
+여기서 video의 형태를 정의한다.
+해야할것은 model 즉 document name이고
+다른 하나는 schema다, schema는 형태이다.
+model은 그냥 실제 data이다.
+
+const VideoSchema = new mongoose.Schema()
+여기에 VideoSchema를 정의한다.
+
+const VideoSchema = new mongoose.Schema({
+  fileUrl: {
+    type: String,
+    required: "File URL is required"
+  },
+    views: {
+    type: Number,
+    default: 0
+  },
+    createdAt: {
+    type: Date,
+    default: Date.now
+  }
+
+fileUrl을 가지고 있으며 타입은 문자열
+required가 충족되지 못하면 error msg는 File URL is required라 뜬다.
+fileUrl 값이 없는 Video를 생성하면 error msg가 뜬다.
+
+view의 타입은 숫자고이고
+video가 처음 생성되면 views는 0이 되도록 설정
+
+createdAt의 타입은 날자이고
+처음 생성되면 현재의 날짜를 반환한다.
+
+이제 이 스키마를 통해서 모델을 만들어보자
+const model = mongoose.model("Video", VideoSchema);
+
+model의 이름은 Video
+Video model의 schema는 VideoSchema가 된다.
+
+현재 database는 아직 인식하지를 못한다.
+연결은 되어 있지만 거기에 model이 있는건 알지 못함.
+init.js에 import 해줘야 한다.
+import "./models/Video";
