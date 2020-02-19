@@ -279,3 +279,40 @@ Video model의 schema는 VideoSchema가 된다.
 연결은 되어 있지만 거기에 model이 있는건 알지 못함.
 init.js에 import 해줘야 한다.
 import "./models/Video";
+
+다음으로 알아야 할것은 data의 relationship이다.
+comment에 video의 ID를 저장하거나
+video가 ID의 array를 가지고 있어야 한다.
+
+video에 comment를 달때 이 comment는 어떤 video와 직접적으로 연결되어 있는지?
+두가지 방법이 있다.
+한가지 방법은 여기 comment는 그대로 두고 
+Video에선 모든 comment ID가 담긴 array를 추가하는거다.
+object는 보통 id를 가지고 있다
+따라서 모든 comment의 정보를 저장하는 대신 모든 video들이 comment id를 가지고 있는거다.
+처음 video를 생성하면 comments는 0이다, 왜냐면 comment가 없기 때문
+그다음 해당 video에 대한 comment를 생성하면 새로운 comment id를 video 안에 있는
+comment의 list 라는 곳에 저장, 그리면 comments가 1이 된다.
+
+Comment.js
+
+video: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "Video"
+}
+
+이 comment는 이 video와 연결되어 있고,
+이 video의 type은 mongoose.Schema.Types.ObjectId
+ObjectId가 어디서 온거인지 알려줘야 한다(어느 model인지)
+이 경우에는 Video (ref: "Video")
+
+두번째 방법은 ObjectId들의 array를 생성해야 한다.
+ref는 Comment겠지
+
+Video.js로 와서 comments 추가
+comments: [
+  {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Comment"
+  }
+]
