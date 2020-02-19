@@ -176,3 +176,19 @@ userRouter.get(routes.userDetail(), userDetail);
 a(href=routes.userDetail) Profile -->
 a(href=routes.userDetail(user.id)) Profile
 user.id를 입력해줘야 한다.
+
+--------------------------------------------------------
+MongoDB 설치
+공홈들어가서 설치
+환경변수 설정해줘야함
+path에 
+C:\Program Files\MongoDB\Server\4.0\bin
+추가
+Mongo를 JavaScript와 연결해보기
+JavaScript에서 MongoDB와 연결하려면 Adapter를 통해서 해야한다.
+JavaScript코드를 작성하고 싶으면 MongoDB로부터 Instruction을 받아야 한다.
+이 역할을 Mongoose가 해준다.
+mongoose는 NodeJS를 위한 Object Modeling이다
+npm install mongoose
+
+임시로 만들어둔 db.js를 지우고 진짜 MongoDB연결하기
