@@ -192,3 +192,29 @@ mongoose는 NodeJS를 위한 Object Modeling이다
 npm install mongoose
 
 임시로 만들어둔 db.js를 지우고 진짜 MongoDB연결하기
+Mongoose는 Database와 연결해주는것
+MongoDB는 NoSQL 데이터베이스이고 특징은 규칙이 적고 엄청 유연
+
+dotenv 설치
+
+npm install dotenv
+
+mongoose.connect();
+여기에 우리한테 요청하는건 string으로 된 Database이다
+어디에 Database가 저장되어 있는지 알려준다.
+
+mongodb://localhost:포트번호/Database이름
+mongoose.connect("mongodb://localhost:27017/we-tube");
+
+새로운 버전의 mongoose는 Configuration(환경설정)을 보낼 수 있다.
+mongoose.connect("mongodb://localhost:27017/we-tube", {
+  useNewUrlParser: true, <--
+  useFindAndModify: false <--
+});
+
+MongoDB와의 연결을 db로 저장 한 후
+const db = mongoose.connection;
+
+db.once("open", handleOpen);
+once는 한번만 실행시키는것, 성공여부를 확인할수 있는 function을 만듬
+const handleOpen = () => console.log("✅ Connected to DB");
