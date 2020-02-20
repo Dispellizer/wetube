@@ -434,3 +434,19 @@ file 자체를 server에 직접 저장하는건 좋지 않다
 aws 같은 곳에 저장해서 url만 불러오는 식으로 해야함
 
 gitignore에 uploads도 추가해주자
+
+home의 video 링크를 클릭하면 video id를 받고 video detail을 보여줘야함
+videoDetail Router에서 query로 video id를 받아와야함
+
+console.log(req.params);
+req.params는 url의 param값을 가져옴
+{ id: '5e4e239e5de212309c3e2100' } <-- 결과값
+왜냐하면 routers에 VIDEO_DETAIL = "/:id"; 가 있어서 id로 인식함
+만약 컨트롤러에서 어떤 데이터를 가지고 있다는 것을
+표현하고 싶다면 더블클론(:)과 이름을 넣으면 된다.
+
+req.params.id를 저장한 후 Video Model에서 findById에 id값을 넣어준다
+const video = await Video.findById(id);
+
+video(src=`/${video.fileUrl}`)
+이렇게 앞에 /를 붙이는 이유는 서버에 있는 파일이라 그럼
