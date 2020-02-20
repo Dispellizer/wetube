@@ -450,3 +450,33 @@ const video = await Video.findById(id);
 
 video(src=`/${video.fileUrl}`)
 이렇게 앞에 /를 붙이는 이유는 서버에 있는 파일이라 그럼
+
+editVideo를 함수화 시켜주고
+videoDetail에서 routes.editVideo(video.id)로 변경
+
+비디오 수정하기
+postEditVideo를 추가해줘야 한다
+이때까지 editVideo를 만들어준건 get이다.
+
+videoDetail에서 한것과 비슷한 것을 해야함
+url에서 정보를 받아와야 한다, 어떤 비디오를 수정할지 알아야함
+
+그리고 edit video에 들어가면 title과 description이 현재의 내용으로 채워져 있어야함
+이건 getEditVideo에서 할 일이다
+
+postEditVideo는 video를 업데이트 하는것이다.
+
+get은 뭔가를 채워넣는 작업이고, post는 업데이트하고 redirect하는 작업이다.
+
+textarea는 value를 가지지 않는다.
+
+form action이 video function을 가지고 있는것을 볼수 있다.
+action에 해당하는 url을 수정해야한다.
+form(action=`/videos${routes.editVideo()}`, method="post")
+form(action=`/videos${routes.editVideo(video.id)}`, method="post") <-- 이렇게 수정
+form(action=routes.editVideo(video.id), method="post")
+
+postEditVideo 작업
+await한것을 변수에 저장하지 않는다, 업데이터 하면 끝이라서(정보를 가져오지 않음)
+await Video.findOneAndUpdate({ _id: id }, { title, description });
+findOneAndUpdate - _id를 model에서 찾는다 그리고 title과 description을 update 해줌
