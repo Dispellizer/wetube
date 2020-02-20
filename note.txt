@@ -352,3 +352,53 @@ export const home = async (req, res) => {
     res.render("home", { pageTitle: "Home", videos: [] });
   }
 };
+
+videoUpload
+우선 누군가가 우리 videoController에서 Upload하려할때 무슨일이 일어나는지 알아야함
+video가 아닌 다른 file 들어오지 않도록 보호하기
+upload.pug에 가서 accept="video/*" 추가
+
+아직 send는 되지 않는다
+file을 upload하고 url을 반환하는 middleware가 있어야 한다.
+이 미들웨어는 multer이다
+
+npm install multer
+
+그리고 Upload Form의 enctype에 multipart/form-data를 추가해야 한다.
+왜냐하면 file을 보내는거라 form의 encoding이 달라야 한다.
+
+middleware 추가하기
+
+import multer from "multer";
+
+export const multerVideo = multer({ dest: "videos/" });
+
+destination -> 목적지 .. 비디오가 어디에 저장될지
+
+export const uploadVideo = multerVideo.single("videoFile");
+
+single()은 오직 하나의 파일만 upload할수 있는걸 의미
+namePart는 여기 들어올 파일의 name이다.
+우리가 원하는 파일이 들어간 HTML field의 이름 부분
+
+이후 videoRouter에 가서 uploadVideo 추가
+우리가 file을 upload하면 server에 있는 video 폴더에 업로드 된다.
+postUpload는 해당 file에 접근한다.
+file 방식이 아닌 url로
+
+videoController.js에서 req.file은 "videoFile"의 필드의 파일 정보이다.
+file을 form으로 받아오지 않고 file 자체에서 받아온다.
+
+export const postUpload = async (req, res) => {
+  const {
+    body: { title, description }, // form에서 받는 정보
+    file: { path } // file 자체에서 받는 정보
+    // 파일을 form에서 안받고 file 자체에서 받아옴
+  } = req;
+  const newVideo = await Video.create({
+    fileUrl: path,
+    title,
+    description
+  });
+  res.redirect(routes.videoDetail(newVideo.id));
+  // 이 newVideo는 실제 ID를 가지고 있다.
