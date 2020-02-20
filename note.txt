@@ -483,3 +483,31 @@ findOneAndUpdate - _id를 model에서 찾는다 그리고 title과 description�
 
 비디오 삭제는 get만 있다, 왜냐면 post 할 일이 없다
 누군가가 비디오 삭제를 누르면 url로 가서 이부분의 url을 가져와서 해당 비디오를 삭제
+
+비디오를 업로드 했을때 최근에 올린것이 위에 와야 한다.
+모든 비디오를 찾고 정렬을 해야한다.
+const videos = await Video.find({}).sort({ _id: -1 });
+-1의 의미는 위 아래 순서를 바꾸겠다는 의미다.
+
+ESLint
+Linter은 뭔가 틀린게 있으면 알려주는 친구이다
+
+npm install eslint -g
+-g 는 global하게 설치한다는 뜻, -g로 설치하면 모든 프로젝트에서 사용가능하다
+
+eslint --init
+니코버전을 설치하자
+npm install eslint@5.9.0 -g
+
+? How would you like to configure ESLint? Use a popular style guide
+? Which style guide do you want to follow? Airbnb (https://github.com/airbnb/javascript)
+? Do you use React? No
+? What format do you want your config file to be in? JavaScript
+
+prettier가 Formatter를 가지고 있으니코딩스타일이나 룰이 필요없다.
+이를 위해서 eslint-config-prettier를 설치해줘야함
+npm install eslint-config-prettier
+그다음 .eslinterc.js에 추가해줘야함
+module.exports = {
+  extends: ["airbnb-base", "plugin:prettier/recommended"]
+};
