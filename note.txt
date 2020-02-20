@@ -316,3 +316,39 @@ comments: [
     ref: "Comment"
   }
 ]
+
+이렇게 두가지 선택지가 있다.
+모든 CommentID들을 array로 video에 집어 넣을건지,
+혹은 Comment에 연결된 Video ID를 줄것인지
+
+이렇게 만든 모델들을 사용하기 위해선
+videoController에 가서
+import 해준다
+import Video from "../models/Video";
+이것은 model이고, element를 받는 통로이지 element가 아니다
+
+export const home = async (req, res) => {
+  const videos = await Video.find(({}))
+  res.render("home", { pageTitle: "Home", videos });
+};
+
+async는 기다려주는것
+await는 다음 과정이 끝날때까지 잠시 기다려 달라는것
+Video.find(({})) 이렇게 하면 database에 있는 모든 video를 가져온다.
+Video.find(({}))가 끝날때까지 기다린다
+
+이렇게 하면 await 부분이 끝나기 전까지 render 부분을 실행시키지 않는다.
+실패하든 성공하든 await 부분이 끝나면 다음것을 실행한다
+
+이를 위해서 try, catch를 사용한다.
+try는 우리가 해야할 것들, 그리고 만약 실패한다면 error를 잡아낸다
+
+export const home = async (req, res) => {
+  try {
+    const videos = await Video.find({});
+    res.render("home", { pageTitle: "Home", videos });
+  } catch (error) {
+    console.log(error);
+    res.render("home", { pageTitle: "Home", videos: [] });
+  }
+};
