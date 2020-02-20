@@ -480,3 +480,6 @@ postEditVideo 작업
 await한것을 변수에 저장하지 않는다, 업데이터 하면 끝이라서(정보를 가져오지 않음)
 await Video.findOneAndUpdate({ _id: id }, { title, description });
 findOneAndUpdate - _id를 model에서 찾는다 그리고 title과 description을 update 해줌
+
+비디오 삭제는 get만 있다, 왜냐면 post 할 일이 없다
+누군가가 비디오 삭제를 누르면 url로 가서 이부분의 url을 가져와서 해당 비디오를 삭제
