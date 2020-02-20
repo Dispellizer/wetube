@@ -402,3 +402,35 @@ export const postUpload = async (req, res) => {
   });
   res.redirect(routes.videoDetail(newVideo.id));
   // 이 newVideo는 실제 ID를 가지고 있다.
+
+home에 갔을때 video들이 나타나지 않는데
+왜냐하면 link가 망가졌기 때문
+middleware에 multer dist를 수정
+videos/ --> uploads/videos
+
+MongoDB model이 한 document를 database에 저장했고,
+이 document는 잘못된 url을 가지고 있다.(dist가 videos/여서 변경한 uploads/videos가 아님)
+우리는 아직 Video를 수정하는 방법을 가지고 있지 않다.
+MongoDB에서 어떻게 다를수 있는지 알아보자
+mongo를 치고 mongo comments를 가지고 database 수정하는 방법
+
+collections는 models 같은것
+> use we-tube
+switched to db we-tube
+> show collections
+videos
+> db.videos.remove({})
+WriteResult({ "nRemoved" : 4 })
+> exit
+bye
+
+home의 영상이 재생이 안될건데 uploads에 대한 router가 없어서 그럼
+app.use("/uploads", express.static("uploads"));
+express.static()은 directory에서 file을 보내주는 middleware이다
+/uploads로 가면 "uploads"라는 디렉토리로 들어간다는 의미
+정확하게 이해 못하겠음 이부분
+
+file 자체를 server에 직접 저장하는건 좋지 않다
+aws 같은 곳에 저장해서 url만 불러오는 식으로 해야함
+
+gitignore에 uploads도 추가해주자
