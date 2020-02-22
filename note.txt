@@ -511,3 +511,21 @@ npm install eslint-config-prettier
 module.exports = {
   extends: ["airbnb-base", "plugin:prettier/recommended"]
 };
+
+eslint 고치기
+고치긴 고쳤는데 왜 고장난건지는 모르겟음
+왜 고장난거지?
+
+let videos = [];
+videos는 나중에 수정될거라서 const가 아닌 let로 둔다
+
+regular expression(정규식)은 string으로 부터 무언가를 가져오는 것이다.
+
+내가 검색한 단어와 완전히 똑같은게 아니라 내가 넣은 단어를 포함하는걸 찾고싶다
+이럴때 mongoose에 regex를 이용해야 한다.
+  try {
+    videos = await Video.find({
+      title: { $regex: searchingBy, $options: "i" }
+    });
+searchingBy가 포함된 단어를 찾고 options으로 i를 줬는데 i는 insenstive(덜민감하다)를 의미
+대소문자 구분 하지 않는다는 뜻
