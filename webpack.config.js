@@ -1,4 +1,5 @@
 const path = require("path");
+const autoprefixer = require("autoprefixer");
 const ExtractCSS = require("extract-text-webpack-plugin");
 // 이게 있기 때문에 webpack에게 css를 가지고 뭘 어떻게 할지 알려준다.
 
@@ -11,20 +12,33 @@ const config = {
   entry: ENRTY_FILE,
   mode: MODE,
   module: {
+    // 모듈이 발견될때마다
     rules: [
+      // 다음과 같은 룰을 따르라
       {
         test: /\.(scss)$/, // scss 파일만 찾는 정규식
         use: ExtractCSS.extract([
           // scss파일을 찾고나서 해야할 것들을 use에 적어준다
+          // 이경우에는ExtractCss.extract plugin을 사용하고
+          // 이 plugin 내부에서 또 plugin을 사용, scss --> css로 통역하기위해서
           {
             loader: "css-loader"
             // 이 loader는 webpack이 css를 이해할 수 있도록 한다
           },
           {
-            loader: "postcss-loader"
+            loader: "postcss-loader",
+            options: {
+              plugin() {
+                return [autoprefixer({ browsers: "cover 99.5%" })];
+                // 99.5%의 브라우저들을 커버하도록 한다는 의미
+              }
+            }
+            // css를 받아서 우리가 얘한테 주는 plugin을 가지고 css를 변환해줌
+            // ex) postcss-loader를 사용하는데 ie에 호환되게끔 만들어줘 라고 할수있음
           },
           {
             loader: "sass-loader"
+            // sass, scss를 받아서 일반 css로 바꿔준다
           }
         ])
       }
@@ -32,8 +46,9 @@ const config = {
   },
   output: {
     path: OUTPUT_DIR,
-    filename: "[name].[format]"
-  }
+    filename: "[name].js"
+  },
+  plugins: [new ExtractCSS("styles.css")]
 };
 
 module.exports = config;

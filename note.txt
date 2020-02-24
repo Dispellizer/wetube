@@ -573,3 +573,21 @@ npm run dev:assets를 입력했을때 여전히 에러가 발생하는데 webpac
 
 npm install extract-text-webpack-plugin@next
 @next는 beta버전을 설치하라는 뜻
+
+webpack은 confing파일에서 아래에서부터 위로 실행함
+
+css-loader, postcss-loader, sass-loader를 설치
+npm install css-loader postcss-loader sass-loader
+
+postcss를 사용하면 많은 플러그인을 설치하여 사용할수 있다.
+:fullscreen {} 을 쓰면 autoprefixer를 통해서
+:-webkit-:full-screen {}과 :-moz-full-screen {}을 만들어준다.
+
+npm install autoprefixer
+
+npm install node-sass
+
+sass-loader는 sass를 css로 옮겨주고
+postcss-loader는 특정 plugin들을 css에 대해 실행시켜 주고
+cssl-loader는 css를 가져와주고
+ExtractCSS로 그 부분만 추출해준다.
