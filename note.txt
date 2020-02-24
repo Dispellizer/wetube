@@ -529,3 +529,26 @@ regular expression(정규식)은 string으로 부터 무언가를 가져오는 �
     });
 searchingBy가 포함된 단어를 찾고 options으로 i를 줬는데 i는 insenstive(덜민감하다)를 의미
 대소문자 구분 하지 않는다는 뜻
+
+webpack - module bundler
+우리가 많은 파일들을 가져와서 webpack에게 주면 그것들을 완전히 호환되는 static 파일로 변환해주는것
+es6나 sass를 se5나 css로 변환해줘서 오래된 브라우저도 알아먹게 해주는것?
+
+npm install webpack webpack-cli
+설치후 webpack.config.js 생성
+
+"start": "nodemon --exec babel-node init.js --delay 2"
+
+"dev:server": "nodemon --exec babel-node init.js --delay 2",
+"dev:assets": "webpack" --> 이러면 webpack.config.js파일의 설정값을 읽어온다
+package.json의 scripts부분 변경
+
+더이상 npm start가 아닌 npm run dev:server, npm run dev:asset를 각각의 터미널에서 해줘야 한다.
+webpack.config.js에서 es6사용불가, 구형js 써야한다
+webpack은 entry라고 불리는 것이 있고 output라고 불리는 것이 있다.
+entry는 파일이 어디서 왔는가? 이고
+output은 어디에 넣을 것인가를 의미
+
+assets 폴더 생성
+그밑에 js, scss폴더 생성
+js 폴더에는 main.js, scss폴더에는 styles.scss 생성
