@@ -530,6 +530,9 @@ regular expression(정규식)은 string으로 부터 무언가를 가져오는 �
 searchingBy가 포함된 단어를 찾고 options으로 i를 줬는데 i는 insenstive(덜민감하다)를 의미
 대소문자 구분 하지 않는다는 뜻
 
+
+https://brunch.co.kr/@topherlee/86 참조
+
 webpack - module bundler
 우리가 많은 파일들을 가져와서 webpack에게 주면 그것들을 완전히 호환되는 static 파일로 변환해주는것
 es6나 sass를 se5나 css로 변환해줘서 오래된 브라우저도 알아먹게 해주는것?
@@ -591,3 +594,17 @@ sass-loader는 sass를 css로 옮겨주고
 postcss-loader는 특정 plugin들을 css에 대해 실행시켜 주고
 cssl-loader는 css를 가져와주고
 ExtractCSS로 그 부분만 추출해준다.
+
+npm install babel-loader
+
+기억해야할 것은
+entry가 있고 mode가 있고 rules가 있고 각종 loader들이 있다.
+그리고 output이 있다.
+
+@babel/polyfill
+브라우저의 구멍을 매워주는 자바스크립트 파일이다
+크롬은 async를 이해하지 못하는데 이를 이해하게 해줌
+아직 브라우저에 없는 무언가를 모방해서 실행시켜줌
+npm install @babel/polyfill
+
+https://brunch.co.kr/@topherlee/86

@@ -9,12 +9,20 @@ const ENRTY_FILE = path.resolve(__dirname, "assets", "js", "main.js");
 const OUTPUT_DIR = path.join(__dirname, "static");
 
 const config = {
-  entry: ENRTY_FILE,
+  entry: ["@babel/polyfill", ENRTY_FILE],
   mode: MODE,
   module: {
     // 모듈이 발견될때마다
     rules: [
       // 다음과 같은 룰을 따르라
+      {
+        test: /\.(js)$/,
+        use: [
+          {
+            loader: "babel-loader"
+          }
+        ]
+      },
       {
         test: /\.(scss)$/, // scss 파일만 찾는 정규식
         use: ExtractCSS.extract([
@@ -28,7 +36,7 @@ const config = {
           {
             loader: "postcss-loader",
             options: {
-              plugin() {
+              plugins() {
                 return [autoprefixer({ browsers: "cover 99.5%" })];
                 // 99.5%의 브라우저들을 커버하도록 한다는 의미
               }
