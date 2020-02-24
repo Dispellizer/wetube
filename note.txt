@@ -552,3 +552,24 @@ output은 어디에 넣을 것인가를 의미
 assets 폴더 생성
 그밑에 js, scss폴더 생성
 js 폴더에는 main.js, scss폴더에는 styles.scss 생성
+
+webpack.config.js
+const path = require("path");
+// path를 absolute로 표현해주는 node.js 내장 패키지
+const ENRTY_FILE = path.resolve(__dirname, "assets", "js", "main.js");
+const OUTPUT_DIR = path.join(__dirname, "static");
+
+__dirname은 현재 프로젝트 디렉토리 이름이다, 어디에서 접근가능한 node.js 전역변수
+
+"scripts": {
+  "dev:server": "nodemon --exec babel-node init.js --delay 2",
+  "dev:assets": "cross-env WEBPACK_ENV=development webpack",
+  "build:asset": "WEBPACK_ENV=production webpack"
+  build:asset은 내 코드를 server로 올려주는것
+},
+
+dev:assets에 cross-env를 추가해줘야함(mac이 아니라 그런듯?)
+npm run dev:assets를 입력했을때 여전히 에러가 발생하는데 webpack이 css부분을 이해못해서 이다
+
+npm install extract-text-webpack-plugin@next
+@next는 beta버전을 설치하라는 뜻
