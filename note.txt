@@ -608,3 +608,20 @@ entry가 있고 mode가 있고 rules가 있고 각종 loader들이 있다.
 npm install @babel/polyfill
 
 https://brunch.co.kr/@topherlee/86
+
+passport
+사용자 인증을 해주는 미들웨어
+브라우저 상에서 쿠키를 설정해주면 그 쿠키를 통해서 유저 id를 알수있다
+인증이 완료된 object를 controller로 넘겨준다
+
+UserSchema 생성
+
+npm i passport-local-mongoose
+패스워드 설정, 확인 등등 그런것들을 자동으로 해주는 것
+
+UserSchema.plugin(passportLocalMongoose, { usernameField: "email" });
+UserSchema는 passportLocalMongoose라는 plugin을 가지고 usernameField는 email이다
+
+passport.js 생성
+npm i passport passport-local
+passport-local은 username과 password를 쓰는 사용자 인증 방식(strategy)
