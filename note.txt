@@ -699,3 +699,28 @@ routes의 request object에 할당하게됨 (req.user)
 서버를 재 실행 할때마다 session에 대한 정보를 잃게된다
 왜냐하면 session정보, 쿠키정보들을 메모리에 저장하고 있기 때문
 이를 해결해야 한다 --> session이 유지되기를 원하기때문
+
+이를 해결하기위해 mongoDB에 세션을 저장해야 한다.
+npm i connect-mongo
+connect-mongo를 써서 session에게 데이터를 MongoStore라는 저장소에 저장하여야함
+
+
+routes들로의 출입을 제한해야함
+로그인 된 사용자가 login, join 화면으로 접근을 못하게 하는것
+이를위해 미들웨어를 생성
+
+export const onlyPublic = (req, res, next) => {
+  if (req.user) {
+    res.redirect(routes.home);
+  } else {
+    next();
+  }
+};
+
+export const onlyPriate = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect(routes.home);
+  }
+};
