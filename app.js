@@ -4,6 +4,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
+import session from "express-session";
 import { localsMiddleWare } from "./middlewares";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -22,6 +23,16 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    // 무작위 문자열로 쿠키에 들어있는 session ID를 암호화 하기 위한것
+    resave: true,
+    // 세션을 강제로 저장하게 합니다
+    saveUninitialized: false
+    // 초기화 하지 않은(uninitialized)세션을 저장소에 저장합니다
+  })
+);
 app.use(passport.initialize());
 // passport 초기화
 app.use(passport.session());

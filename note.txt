@@ -671,3 +671,31 @@ export const postLogin = passport.authenticate("local", {
 
   res.locals.user = req.user || {};
   // passport가 object를 요청(request)에도 올려준다.
+  cookieParser로부터 passport 초기화 -> passport가 쿠키를 들여다봐서
+  그 쿠기 정보에 해당하는 사용자를 찾음 -> 그리고 passport가 찾은 그 사용자를
+  요청(request)의 object 즉 req.user로 만들어준다.
+
+  expres-session은 session을 관리해주기 위해 필요한것
+  npm i express-session
+
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: true,
+    saveUninitialized: false
+    // 위의 3개는 필수요소이다
+  })
+);
+
+로그인시 쿠키가 생성되고 내가 웹 브라우저를 새로고침 할때마다,
+즉 이정보를 웹 서버로 전송할때마다 서버에서는 passport 인증과정을 호출하고
+passport는 deserialize를 통하여 내가 어느 사용자인지 식별한다.   
+
+express는 session을 이용함으로써 쿠키를 그 손이 쥘수 있게 된다.
+passport를 통해서 우린 session을 이용하는데, 즉 session이 가진 쿠키를 이용한다는 것을 의미
+그리고 그 passport로 deserialize를 진행함 -> 그 사용자를 middleware나
+routes의 request object에 할당하게됨 (req.user)
+
+서버를 재 실행 할때마다 session에 대한 정보를 잃게된다
+왜냐하면 session정보, 쿠키정보들을 메모리에 저장하고 있기 때문
+이를 해결해야 한다 --> session이 유지되기를 원하기때문
