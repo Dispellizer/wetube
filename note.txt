@@ -625,3 +625,32 @@ UserSchema는 passportLocalMongoose라는 plugin을 가지고 usernameField는 e
 passport.js 생성
 npm i passport passport-local
 passport-local은 username과 password를 쓰는 사용자 인증 방식(strategy)
+
+passport.use(User.createStrategy());
+passport야 strategy를 사용해
+createStrategy()는 이미 구성된 passport-local의 LocalStrategy를 생성한다.
+
+serialization은 어떤 정보를 쿠키에게 주느냐를 의미한다
+브라우저가 가지고 있는 정보중 어떤 정보를 쿠키에게 주느냐?
+어떤 field가 쿠키에 포함될 것인지 알려주는 역할을 한다
+
+deserializeUser는 어느사용자인지 어떻게 찾는가?
+만약 쿠키를 받았는데 id가 1이면 어떻게 할까?
+
+globalRouter의 postJoin부분을 수정해야함
+패스워드가 맞는지 체크하는 미들웨어가 하나 들어가야함
+사용자 가입도 시키고 그 사용자를 로그인 시켜볼거다.
+
+mongo
+> use we-tube
+switched to db we-tube
+> show collections
+users
+videos
+> db.users.find({})
+{ "_id" : ObjectId("5e54795ac29a193f2898a592"), "name" : "first", "email" : "123@123.com", "__v" : 0 }
+> db.users.remove({})
+WriteResult({ "nRemoved" : 3 })
+
+회원가입후 홈화면으로 보내는방법과
+회원가입후 바로 로그인 된 상태가 되는 방법이 있는데 후자를 이용할거임
