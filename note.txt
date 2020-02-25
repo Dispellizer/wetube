@@ -654,3 +654,20 @@ WriteResult({ "nRemoved" : 3 })
 
 회원가입후 홈화면으로 보내는방법과
 회원가입후 바로 로그인 된 상태가 되는 방법이 있는데 후자를 이용할거임
+
+join을 처리하는 controller를 middleware로 바꿀거다
+누군가를 사용자로 가입시키는 postJoin에는 next()를 붙여주자
+
+postJoin에서 받은 username, password를 postLogin으로 보낼거다
+
+export const postLogin = passport.authenticate("local", {
+  // passport.authenticate은 username과 password를 찾아보도록 설정되어있음
+  // "local"은 우리가 설치해준 Strategy의 이름이다
+  failureRedirect: routes.login,
+  // 로그인 하는데 실패하면 로그인으로
+  successRedirect: routes.home
+  // 로그인 성공시 홈으로
+});
+
+  res.locals.user = req.user || {};
+  // passport가 object를 요청(request)에도 올려준다.
