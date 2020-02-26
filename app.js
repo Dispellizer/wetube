@@ -41,6 +41,7 @@ app.use(
 );
 app.use(passport.initialize());
 // passport 초기화
+// initialize 해두면 user 의 정보가 req.user 에 실린다
 app.use(passport.session());
 // session에 저장
 

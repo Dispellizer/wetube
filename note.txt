@@ -766,3 +766,9 @@ https://github.com/settings/applications/new 에서 appliciation 생성해야한
 
 사용자를 깃헙 페이지로 보냄 -> 이사람들(application)에게 너의 정보를 줘도 괜찮냐?라고 물음
 사용자의 승인을 받으면 사용자를 다시 우리 application으로 돌려보냄(사용자의 정보를 포함해서)
+
+
+export const githubLoginCallback = async (accessToken, refreshToken, profile, cb)
+함수에 사용하지 않는 변수가 있다면
+export const githubLoginCallback = async (_, __, profile, cb)
+아래와 같이 해주면 좋다.
