@@ -785,3 +785,33 @@ cb(null, user) --> pasport는 이 user를 취해서 쿠키를 만들고 저장�
 그래서 해결책은
 이 id로 사용자를 찾고, 만약 존재하지 않으면 존재하지 않는다고 띄울거다.
 지금 글로벌변수인 user를 실제 로그인한 user로 바꿔야 된다.
+
+전에는 user라는 변수가 우리의 controller로부터 전달받은 것인지
+middleware로 인한 것인지 구별되지 않았는데 이제는 그럴일이 없다.
+
+/users/23453245에 들어갔을때 에러나는걸 고칠거임
+export const userDetail = async (req, res) => {
+  const {
+    params: { id }
+  } = req;
+  try {
+    const user = await User.findById(id);
+    res.render("userDetail", { pageTitle: "User Detail", user });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
+user를 찾으면 userDetail로
+user가 없으면 home로
+
+facebookLogin
+
+http://www.passportjs.org/packages/passport-facebook/
+
+npm i passport-facebook
+
+https://developers.facebook.com/ 앱 등록
+myapp에 들어가서 facebook로그인 설정
+
+web -> http://localhost:4000/ -> 대시보드
+설정 - 기본설정에서 앱 id와 secret을 .env로 입력해줌
