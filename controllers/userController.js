@@ -49,7 +49,7 @@ export const githubLogin = passport.authenticate("github");
 export const githubLoginCallback = async (_, __, profile, cb) => {
   // cb함수는 인증에 성공한 상황해서 호출 해야한다.
   const {
-    _json: { id, avatar_url, name, email }
+    _json: { id, avatar_url: avatarUrl, name, email }
   } = profile;
   try {
     const user = await User.findOne({ email });
@@ -63,13 +63,14 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
       return cb(null, user);
       // 이메일 동일한 사용자를 찾았을때 cb함수를 호출한다
       // 에러는 없음(null), user는 찾았습니다.
+      // 그래서 이걸 쿠키에 저장할 수 있게 된다.
     }
     const newUser = await User.create({
       // 사용자를 찾지 못했으면 계정을 만든다.
       email,
       name,
       githubId: id,
-      avatarUrl: avatar_url
+      avatarUrl
     });
     return cb(null, newUser);
   } catch (error) {
@@ -87,9 +88,13 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const users = (req, res) => res.render("users", { pageTitle: "Users" });
-export const userDetail = (req, res) =>
+export const getMe = (req, res) => {
+  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+};
+
+export const userDetail = (req, res) => {
   res.render("userDetail", { pageTitle: "User Detail" });
+};
 export const editProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "Edit Profile" });
 export const changePassword = (req, res) =>

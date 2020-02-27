@@ -9,7 +9,8 @@ import {
   getLogin,
   postLogin,
   githubLogin,
-  postGithubLogIn
+  postGithubLogIn,
+  getMe
 } from "../controllers/userController";
 import { onlyPublic, onlyPriate } from "../middlewares";
 
@@ -33,5 +34,7 @@ globalRouter.get(
   // 이 다음 passport의 githubLoginCallback을 실행시킨다.
   postGithubLogIn
 );
+
+globalRouter.get(routes.me, getMe);
 
 export default globalRouter;
