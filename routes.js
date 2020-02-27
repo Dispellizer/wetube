@@ -70,7 +70,7 @@ const routes = {
   githubCallback: GITHUB_CALLBACK,
   me: ME,
   facebook: FB,
-  facebokCallback: FB_CALLBACK
+  facebookCallback: FB_CALLBACK
 };
 
 export default routes;

@@ -815,3 +815,38 @@ myapp에 들어가서 facebook로그인 설정
 
 web -> http://localhost:4000/ -> 대시보드
 설정 - 기본설정에서 앱 id와 secret을 .env로 입력해줌
+
+facebook에서 email을 받아오지 못하는데 개발자 페이지에서 개발중을 on으로 바꿔야한다.
+개인정보 처리방침 URL에 http://www.passportjs.org/packages/passport-facebook/ 입력
+카테고리는 엔턴테인먼트로
+
+좌측의 앱 검수 - 내 권한 및 기능을 가보면 email을 이제 받을수 있게 설정되어있다.
+
+다시한번 join해보면 오류가 난다, 이유는 localhost가 https가 아닌 http라서그럼
+이를위해 localtunnel사용
+localtunnel은 로컬서버에 https 터널을 만들어준다
+npm install -g localtunnel
+설치후
+lt --port 4000
+
+--------------------
+로컬터널 서버가 다운되는경우가 많아서 ngrok를 사용
+npm install -g ngrok
+ngrok http 4000
+-----------------------
+이렇게 하는것은 facebook에 https로 인식하게끔 하기위해 하는것
+실제로는 이렇게 하면 안됨.
+package.json도 수정
+
+다시한번 join을 하면 에러가뜬다
+redirect하는 주소가 http라서 그럼
+ngrok의 주소를 입력해줘야함
+callbackURL: `https://f5e9b5df.ngrok.io${routes.facebookCallback}`
+
+또 에러가남
+이번엔 개발자 도구 들어가서
+설정 - 기본설정 - 맨 아래의 웹사이트에
+https://ngrok.io/를 입력
+설정 - 기본설정에서 앱 도메인 https://f5e9b5df.ngrok.io , https://ngrok.io 입력
+페이스북 로그인 - 설정 - 유효한 oauth 리디렉션 url 입력
+https://f5e9b5df.ngrok.io, https://f5e9b5df.ngrok.io/auth/facebook/callback 입력

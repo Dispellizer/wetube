@@ -4,7 +4,7 @@ import FacebookStrategy from "passport-facebook";
 import User from "./models/User";
 import {
   githubLoginCallback,
-  fadebookLoginCallback
+  facebookLoginCallback
 } from "./controllers/userController";
 import routes from "./routes";
 
@@ -31,7 +31,7 @@ passport.use(
       clientSecret: process.env.FB_SECRET,
       callbackURL: `http://localhost:4000${routes.facebookCallback}`
     },
-    fadebookLoginCallback
+    facebookLoginCallback
   )
 );
 

@@ -12,9 +12,9 @@ import {
   postGithubLogIn,
   getMe,
   facebookLogin,
-  postFacebookLogIn
+  postFacebookLogin
 } from "../controllers/userController";
-import { onlyPublic, onlyPriate } from "../middlewares";
+import { onlyPublic, onlyPrivate } from "../middlewares";
 
 const globalRouter = express.Router();
 
@@ -26,7 +26,7 @@ globalRouter.post(routes.login, onlyPublic, postLogin);
 
 globalRouter.get(routes.home, home);
 globalRouter.get(routes.search, search);
-globalRouter.get(routes.logout, onlyPriate, logout);
+globalRouter.get(routes.logout, onlyPrivate, logout);
 
 globalRouter.get(routes.github, githubLogin);
 
@@ -41,9 +41,9 @@ globalRouter.get(routes.me, getMe);
 
 globalRouter.get(routes.facebook, facebookLogin);
 globalRouter.get(
-  routes.facebokCallback,
+  routes.facebookCallback,
   passport.authenticate("facebook", { failureRedirect: "/login" }),
-  postFacebookLogIn
+  postFacebookLogin
 );
 
 export default globalRouter;
