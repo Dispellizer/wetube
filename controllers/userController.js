@@ -172,6 +172,7 @@ export const postChangePassword = async (req, res) => {
       return;
     }
     await req.user.changePassword(oldPassword, newPassword);
+    // changePassword는 passport-local-mongoose에서 제공해주는것
     res.redirect(routes.me);
   } catch (error) {
     res.status(400);

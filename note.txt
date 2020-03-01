@@ -875,3 +875,42 @@ avatarUrl: file ? file.path : req.user.avatarUrl
 아바타를 업로드 하지 않으면 현재 로그인 된 사람의 avatarurl을 가져온다.
 
 비밀번호를 변경할려면 changePassword(oldPassword, newPassword, [cb])를써야한다.
+
+db.videos.remove({})
+업로딩에서 우리는 유저(작성자)없이 업로드 하길 원하지 않는다.
+비디오 크레이에터가 비디오를 만들때 크리에이터의 아이디를 저장할 필요가 있다.
+그리고 나서 우리는 video id를 videos array에 넣을 필요가 있다.(push)
+
+만약 creator의 id가 아니라 username을 알려면 어떻게 해야할까?
+
+
+const video = await Video.findById(id).populate("creator");
+populate()는 객체를 데려오는 함수이다.
+오직 ObjectId에만 쓸수있다.
+creator의 객체를 데려온다(아이디가 아닌 객체로 보여준다)
+
+{ views: 0,
+  comments: [],
+  _id: 5e5b5b9d8f7d705d7c3521c6,
+  fileUrl: 'uploads\\videos\\b8dcb1f3eafe6607f625425bd7375952',
+  title: '외국인이 찍은 서울.youtube',
+  description: 'lalalala',
+  creator: 5e5b5632cc77375718bf8187,
+  createdAt: 2020-03-01T06:52:13.743Z,
+  __v: 0 }
+
+  { views: 0,
+  comments: [],
+  _id: 5e5b5b9d8f7d705d7c3521c6,
+  fileUrl: 'uploads\\videos\\b8dcb1f3eafe6607f625425bd7375952',
+  title: '외국인이 찍은 서울.youtube',
+  description: 'lalalala',
+  creator:
+   { comments: [],
+     videos: [ 5e5b5b9d8f7d705d7c3521c6 ],
+     _id: 5e5b5632cc77375718bf8187,
+     name: 'dddd',
+     email: 'sepia6691@naver.com',
+     __v: 1 },
+  createdAt: 2020-03-01T06:52:13.743Z,
+  __v: 0 }
