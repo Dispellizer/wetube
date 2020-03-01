@@ -859,3 +859,17 @@ profile 이쁘게 만들기
 로그인한 사람이 아니면 edit proifle과 change password 버튼이 나오지 않는다.
 이것은 미들웨어에서 로그인한 사람은 loggedUser로 템플릿이 반환해준다
 res.locals.loggedUser = req.user || null;
+
+그리고 edit video에도 똑같이 적용해줘야한다
+하지만 지금은 작성자가 없다.
+
+getEditProfile은 내 이름하고 이메일을 반드시 보여줘야한다
+input(type="text", placeholder="Name", name="name", value=loggedUser.name)
+input(type="email", placeholder="Email", name="email", value=loggedUser.email)
+
+다음은 사용자가 프로필 사진을 바꿀수 있게 해주자
+미들웨어에 업로드 아바타 부분 추가
+
+avatarUrl: file ? file.path : req.user.avatarUrl
+아바타를 업로드 하면 file에 path가 있으니 file.path를 반환하지만
+아바타를 업로드 하지 않으면 현재 로그인 된 사람의 avatarurl을 가져온다.
