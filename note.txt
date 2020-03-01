@@ -850,3 +850,12 @@ https://ngrok.io/를 입력
 설정 - 기본설정에서 앱 도메인 https://f5e9b5df.ngrok.io , https://ngrok.io 입력
 페이스북 로그인 - 설정 - 유효한 oauth 리디렉션 url 입력
 https://f5e9b5df.ngrok.io, https://f5e9b5df.ngrok.io/auth/facebook/callback 입력
+
+페북로그인은 그냥 구현만 해뒀지 안쓸거임 깃헙로그인만 쓸거임
+
+================================================================
+
+profile 이쁘게 만들기
+로그인한 사람이 아니면 edit proifle과 change password 버튼이 나오지 않는다.
+이것은 미들웨어에서 로그인한 사람은 loggedUser로 템플릿이 반환해준다
+res.locals.loggedUser = req.user || null;
