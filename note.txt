@@ -873,3 +873,5 @@ input(type="email", placeholder="Email", name="email", value=loggedUser.email)
 avatarUrl: file ? file.path : req.user.avatarUrl
 아바타를 업로드 하면 file에 path가 있으니 file.path를 반환하지만
 아바타를 업로드 하지 않으면 현재 로그인 된 사람의 avatarurl을 가져온다.
+
+비밀번호를 변경할려면 changePassword(oldPassword, newPassword, [cb])를써야한다.
