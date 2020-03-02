@@ -919,3 +919,9 @@ creator의 객체를 데려온다(아이디가 아닌 객체로 보여준다)
   http://localhost:4000/videos/5e5b5b9d8f7d705d7c3521c6/edit
   의 링크에 들어갔을때 수정못하도록 해야함
   크리에이터의 id가 로그인한 id와 같지않으면 video를 edit할 수 없게 해야함
+
+  if (video.creator !== req.user.id) {
+      throw Error();
+    } else {
+      res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+    }
