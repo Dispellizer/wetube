@@ -949,5 +949,20 @@ env: {
   browser: true
 }
 
+https://developer.mozilla.org/ko/docs/Web/API/HTMLMediaElement
+
 playBtn.innerHTML = '<i class="fas fa-pause"></i>';
 '<i class="fas fa-pause"></i>'에서 ''을 써준이유는 안에 "가 있기때문
+
+전체화면의 경우 fullscreen인지 아닌지에 대한 기능을 아직 제공하지 않는다.
+if(videoPlayer.fullscreen) <-- 이렇게 체크 불가능
+그래서 eventListener를 제거해주고 추가해주는 방식으로 구현해야 한다.
+한번 누르면 전체화면으로 변경해주고, 그다음 이벤트 리스너 제거, 추가 방식
+
+video의 경우 videoPlayer가 아니라 videoPlayer를 감싸고 있는 div를 full로 해줄거다.
+그다음 video의 width를 100%로 조정하는 방식.
+내가 만든 컨트롤러만 보여주기 위해서 이런식으로 하는거같다.
+
+videoContainer.webkitRequestFullscreen();
+원래는 videoContainer.requestFullscreen(); 이지만 지원을 안하면 prefix를 사용해서
+webkit를 붙여서 사용(브라우저마다 붙이는 prefix가 다르다.)
