@@ -925,3 +925,6 @@ creator의 객체를 데려온다(아이디가 아닌 객체로 보여준다)
     } else {
       res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
     }
+
+custom video player를 만들어줄거임
+pug 먼저 만든 후 css 작업 이후 js해주기
