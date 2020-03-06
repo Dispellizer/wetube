@@ -943,3 +943,11 @@ if (videoContainer) {
 }
 
 이를위해 videoContainer가 있을때만 init()을 실행시켜주도록 검증해야한다.
+
+eslint가 document를 정의 하지 않았다고 하는데 새로운 rule을 추가해주면 된다.
+env: {
+  browser: true
+}
+
+playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+'<i class="fas fa-pause"></i>'에서 ''을 써준이유는 안에 "가 있기때문
