@@ -928,3 +928,18 @@ creator의 객체를 데려온다(아이디가 아닌 객체로 보여준다)
 
 custom video player를 만들어줄거임
 pug 먼저 만든 후 css 작업 이후 js해주기
+
+프론트의 js 작업은 assets-js 폴더 내에서 이루어진다.
+
+const videoContainer = document.getElementById("jsVideoPlayer");
+
+videoContainer.addEventListener("click", () => false);
+
+위와같이 작성해준후 jsVideoPlayer가 없는 페이지로 가면 videoContainer는 null이 된다.
+js파일이 모든 페이지에 로드 된다는걸 알아둬야 한다.
+
+if (videoContainer) {
+  init();
+}
+
+이를위해 videoContainer가 있을때만 init()을 실행시켜주도록 검증해야한다.
