@@ -82,35 +82,33 @@ export const postGithubLogIn = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const facebookLogin = passport.authenticate("facebook");
+export const postNaverLogin = (req, res) => {
+  res.redirect(routes.home);
+};
 
-export const facebookLoginCallback = async (_, __, profile, cb) => {
+export const naverLogin = passport.authenticate("naver");
+
+export const naverLoginCallback = async (_, __, profile, cb) => {
   const {
-    _json: { id, name, email }
+    _json: { id, profile_image: avatarUrl, nickname: name, email }
   } = profile;
   try {
     const user = await User.findOne({ email });
     if (user) {
-      user.facebookId = id;
-      user.avatarUrl = `https://graph.facebook.com/${id}/picture?type=large`;
-      // 편법임, 이렇게 하면 안됨
+      user.naverId = id;
       user.save();
       return cb(null, user);
     }
     const newUser = await User.create({
       email,
       name,
-      facebookId: id,
-      avatarUrl: `https://graph.facebook.com/${id}/picture?type=large`
+      naverId: id,
+      avatarUrl
     });
     return cb(null, newUser);
   } catch (error) {
     return cb(error);
   }
-};
-
-export const postFacebookLogin = (req, res) => {
-  res.redirect(routes.home);
 };
 
 export const logout = (req, res) => {
@@ -121,6 +119,7 @@ export const logout = (req, res) => {
 
 export const getMe = (req, res) => {
   res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+  console.log(req.user);
 };
 
 export const userDetail = async (req, res) => {

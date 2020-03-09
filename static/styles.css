@@ -401,11 +401,13 @@ input[type="submit"] {
     .social-login button span {
       margin-right: 10px;
       font-size: 20px; }
+      .social-login button span .fa-a:before {
+        content: "N"; }
   .social-login .social-login--github {
     background-color: #444444;
     color: white; }
   .social-login .social-login--facebook {
-    background-color: #3a5998;
+    background-color: #2db400;
     color: white; }
 
 .videoBlock video {
