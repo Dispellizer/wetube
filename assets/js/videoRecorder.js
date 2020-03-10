@@ -3,16 +3,32 @@ const recordBtn = document.getElementById("jsRecordBtn");
 const videoPreview = document.getElementById("jsVideoPreview");
 
 let streamObject;
+let videoRecorder;
 
 const handleVideoData = event => {
-  console.log(event);
+  const { data: videoFile } = event;
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(videoFile);
+  link.download = "recorded.mp3";
+  document.body.appendChild(link);
+  link.click();
+};
+
+const stopRecording = () => {
+  videoRecorder.stop();
+  recordBtn.removeEventListener("click", stopRecording);
+  recordBtn.addEventListener("click", getVideo);
+  recordBtn.innerHTML = "Start recording";
 };
 
 const startRecording = () => {
   // stream에서 가진 video를 recording해주는 함수
-  const videoRecorder = new MediaRecorder(streamObject);
+  videoRecorder = new MediaRecorder(streamObject);
+  //   MediaRecorder는 기본값으로 전체 파일을 한번에 저장한다(녹화가 끝나야 저장함)
   videoRecorder.start();
   videoRecorder.addEventListener("dataavailable", handleVideoData);
+  //   dataavailable는 녹화가 끝났을때 호출이 일어난다.
+  recordBtn.addEventListener("click", stopRecording);
 };
 
 const getVideo = async () => {
