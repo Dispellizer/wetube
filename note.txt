@@ -969,3 +969,6 @@ webkit를 붙여서 사용(브라우저마다 붙이는 prefix가 다르다.)
 
 setInterval(getCurrentTime, 1000);
 setInterval은 매초마다 getCurrentTime를 호출하게 해줌
+
+videoPlayer.addEventListener("ended", hendleEnded);
+ended는 video가 끝났을때를 말함
