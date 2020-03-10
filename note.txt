@@ -966,3 +966,6 @@ video의 경우 videoPlayer가 아니라 videoPlayer를 감싸고 있는 div를 
 videoContainer.webkitRequestFullscreen();
 원래는 videoContainer.requestFullscreen(); 이지만 지원을 안하면 prefix를 사용해서
 webkit를 붙여서 사용(브라우저마다 붙이는 prefix가 다르다.)
+
+setInterval(getCurrentTime, 1000);
+setInterval은 매초마다 getCurrentTime를 호출하게 해줌
