@@ -972,3 +972,20 @@ setInterval은 매초마다 getCurrentTime를 호출하게 해줌
 
 videoPlayer.addEventListener("ended", hendleEnded);
 ended는 video가 끝났을때를 말함
+
+AJAX - 비동기 JS, XML 통신
+API는 그냥 서버와 통신하기 위한 URL
+user는 접근하지 못함, 이 url은 어떠한 것도 렌더링 하지 않음
+
+registerView는 video를 찾는다 try catch로
+찾으면 숫자를 하나 추가해준다(조회수)
+비디오를 저장하고
+상태코드 200을 보낸다.
+에러가 있으면 400을 보냄
+그이후 요청을 끝낸다.
+템플릿이 없는데 그냥 api view라서 그럼, 오직 server와 통신함.
+
+http://localhost:4000/api/5e670c55aa63ad4c28d5be3c/view
+로 들어가면 view가 오름
+
+이런식으로 인위적으로 링크에 들어가지 않고 동영상을 다 봤을때 자동으로 들어가도록 해줄것
