@@ -989,3 +989,11 @@ http://localhost:4000/api/5e670c55aa63ad4c28d5be3c/view
 로 들어가면 view가 오름
 
 이런식으로 인위적으로 링크에 들어가지 않고 동영상을 다 봤을때 자동으로 들어가도록 해줄것
+이를 위해서 axios나 fetch를 사용한다
+우리는 view에넌 fetch, comment에는 axios를 사용할것
+
+fetch("http://localhost:4000/api/5e670c55aa63ad4c28d5be3c/view")를 호출하면
+view가 오른다.
+
+https://hoorooroob.tistory.com/entry/React-React-Naive-TIPS-axios-%EC%99%80-fetch-%EC%96%B4%EB%96%A4-%EA%B2%83%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%A0%EA%B9%8C
+fetch, axios dirrerence
