@@ -997,3 +997,7 @@ view가 오른다.
 
 https://hoorooroob.tistory.com/entry/React-React-Naive-TIPS-axios-%EC%99%80-fetch-%EC%96%B4%EB%96%A4-%EA%B2%83%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%A0%EA%B9%8C
 fetch, axios dirrerence
+
+기본적으로 db에 뭘 생성하면 이전것 부터 최근 순서가 된다.
+reverse하던가 push말고 append를 해주면 된다.
+video.comments.push(newComment.id); --> video.comments.append(newComment.id);
