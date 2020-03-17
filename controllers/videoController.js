@@ -1,5 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video";
+import User from "../models/User";
 import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
@@ -133,6 +134,7 @@ export const postAddComment = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
+    const findUser = await User.findById(user.id);
     const newComment = await Comment.create({
       text: comment,
       creator: user.id
@@ -140,6 +142,8 @@ export const postAddComment = async (req, res) => {
     video.comments.push(newComment.id);
     // video에있는 comments에 newComment의 id를 넣어줌
     video.save();
+    findUser.comments.push(newComment.id);
+    findUser.save();
   } catch (error) {
     res.status(400);
   } finally {

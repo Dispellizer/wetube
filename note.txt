@@ -1001,3 +1001,5 @@ fetch, axios dirrerence
 기본적으로 db에 뭘 생성하면 이전것 부터 최근 순서가 된다.
 reverse하던가 push말고 append를 해주면 된다.
 video.comments.push(newComment.id); --> video.comments.append(newComment.id);
+
+https://github.com/AutumnSky/wetube

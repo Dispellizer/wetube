@@ -28,10 +28,14 @@ block content
                 span.video__comment-number
                     span#jsCommentNumber=video.comments.length 
                     |  comments
-            form.add__comment#jsAddComment
-                input(type="text", placeholder="Add a comment")
+            if loggedUser
+                form.add__comment#jsAddComment
+                    input(type="text", placeholder="Add a comment")
             ul.video__comments-list#jsCommentList
                 each comment in video.comments.reverse()
                     //- reverse는 array의 method중 하나인데 뒤집어 주는거다.
                     li
-                        span=comment.text
+                        span.video__comments-text=comment.text
+                        if loggedUser && comment.creator == loggedUser.id
+                            span.video__comments-delete
+                                i.fas.fa-trash-alt

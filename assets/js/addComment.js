@@ -11,9 +11,14 @@ const increaseNumber = () => {
 const addComment = comment => {
   // fake로 comment 만들기
   const li = document.createElement("li");
-  const span = document.createElement("span");
-  span.innerHTML = comment;
-  li.appendChild(span);
+  const spanText = document.createElement("span");
+  const spanDelBtn = document.createElement("span");
+  spanText.className = "video__comments-text";
+  spanText.innerHTML = comment;
+  spanDelBtn.className = "video__comments-delete";
+  spanDelBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+  li.appendChild(spanText);
+  li.appendChild(spanDelBtn);
   commentList.prepend(li);
   increaseNumber();
 };
