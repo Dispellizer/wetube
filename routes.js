@@ -31,6 +31,7 @@ const NAVER_CALLBACK = "/auth/naver/callback";
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
+const DELETE_COMMENT = "/comment/delete";
 
 const routes = {
   home: HOME,
@@ -78,7 +79,8 @@ const routes = {
   naverCallback: NAVER_CALLBACK,
   api: API,
   registerView: REGISTER_VIEW,
-  addcomment: ADD_COMMENT
+  addcomment: ADD_COMMENT,
+  deletecomment: DELETE_COMMENT
 };
 
 export default routes;

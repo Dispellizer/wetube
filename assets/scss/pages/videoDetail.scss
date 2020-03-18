@@ -62,14 +62,15 @@
           border-radius: 20px;
           border-bottom-left-radius: 0px;
         }
-        .video__comments-delete {
+        .commentDelete {
           display: flex;
-          align-self: center;
+          align-items: center;
           justify-content: center;
-          i {
-            font-size: 18px;
-            cursor: pointer;
-          }
+          width: 30px;
+          height: 30px;
+          margin-top: 7px;
+          border-radius: 50%;
+          background-color: #d81851;
         }
       }
     }

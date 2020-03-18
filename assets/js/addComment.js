@@ -12,13 +12,14 @@ const addComment = comment => {
   // fake로 comment 만들기
   const li = document.createElement("li");
   const spanText = document.createElement("span");
-  const spanDelBtn = document.createElement("span");
+  const delBtn = document.createElement("button");
   spanText.className = "video__comments-text";
   spanText.innerHTML = comment;
-  spanDelBtn.className = "video__comments-delete";
-  spanDelBtn.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+  delBtn.className = "commentDelete";
+  delBtn.innerHTML = `x`;
+  delBtn.addEventListener("click", handleDeleteComment);
   li.appendChild(spanText);
-  li.appendChild(spanDelBtn);
+  li.appendChild(delBtn);
   commentList.prepend(li);
   increaseNumber();
 };
@@ -50,8 +51,38 @@ const handleSubmit = event => {
   commentInput.value = "";
 };
 
+const handleDeleteComment = async event => {
+  const commentId = event.target.value;
+
+  const response = await axios({
+    url: `/api/comment/delete`,
+    method: "POST",
+    data: {
+      commentId
+    }
+  });
+
+  if (response.status === 200) {
+    const commentDeleteButtonArray = document.getElementsByClassName(
+      "commentDelete"
+    );
+    for (let i = 0; i < commentDeleteButtonArray.length; i += 1) {
+      if (commentDeleteButtonArray[i].value === commentId) {
+        commentDeleteButtonArray[i].parentElement.remove();
+      }
+    }
+  }
+};
+
 function init() {
   addCommentForm.addEventListener("submit", handleSubmit);
+
+  const commentDeleteButtonArray = document.getElementsByClassName(
+    "commentDelete"
+  );
+  for (let i = 0; i < commentDeleteButtonArray.length; i += 1) {
+    commentDeleteButtonArray[i].addEventListener("click", handleDeleteComment);
+  }
 }
 
 if (addCommentForm) {

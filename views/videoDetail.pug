@@ -37,5 +37,4 @@ block content
                     li
                         span.video__comments-text=comment.text
                         if loggedUser && comment.creator == loggedUser.id
-                            span.video__comments-delete
-                                i.fas.fa-trash-alt
+                            button.commentDelete.video__comments-delete(value=comment.id) x

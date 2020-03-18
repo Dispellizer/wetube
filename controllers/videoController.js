@@ -150,3 +150,30 @@ export const postAddComment = async (req, res) => {
     res.end();
   }
 };
+
+export const postDeleteComment = async (req, res) => {
+  const {
+    body: { commentId },
+    user
+  } = req;
+  try {
+    console.log("버튼의commentId: ", commentId);
+    const comment = await Comment.findById(commentId);
+    console.log(comment.creator, user.id);
+    if (comment.creator.toString() === user.id) {
+      // const video = await Video.findById(comment.id);
+      // console.log(video);
+      console.log(comment.id);
+      // await video.comments.remove(comment.id);
+      // await video.save();
+      await comment.remove();
+      console.log(comment);
+    } else {
+      res.status(400);
+    }
+  } catch (error) {
+    res.status(400);
+  } finally {
+    res.end();
+  }
+};
