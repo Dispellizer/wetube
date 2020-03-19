@@ -37,4 +37,4 @@ block content
                     li
                         span.video__comments-text=comment.text
                         if loggedUser && comment.creator == loggedUser.id
-                            button.commentDelete.video__comments-delete(value=comment.id) x
+                            button.commentDelete(value=comment.id) x

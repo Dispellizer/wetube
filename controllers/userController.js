@@ -146,7 +146,7 @@ export const postEditProfile = async (req, res) => {
     await User.findByIdAndUpdate(req.user.id, {
       name,
       email,
-      avatarUrl: file ? file.path : req.user.avatarUrl
+      avatarUrl: file ? file.location : req.user.avatarUrl
       // req.user.avatarUrl은 현재 로그인한 사람의 아바타링크
       // 만약 여기 새로운 avatarfile이 없으면 업데이트 하지 않음
     });
