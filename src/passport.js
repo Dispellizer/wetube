@@ -15,7 +15,9 @@ passport.use(
     {
       clientID: process.env.GH_ID,
       clientSecret: process.env.GH_SECRET,
-      callbackURL: `http://localhost:4000${routes.githubCallback}`
+      callbackURL: process.env.PRODUCTION
+        ? `https://calm-brook-48026.herokuapp.com${routes.githubCallback}`
+        : `http://localhost:4000${routes.githubCallback}`
     },
     githubLoginCallback
   )
@@ -29,7 +31,9 @@ passport.use(
     {
       clientID: process.env.NAVER_ID,
       clientSecret: process.env.NAVER_SECRET,
-      callbackURL: `http://localhost:4000${routes.naverCallback}`
+      callbackURL: process.env.PRODUCTION
+        ? `https://calm-brook-48026.herokuapp.com${routes.naverCallback}`
+        : `http://localhost:4000${routes.naverCallback}`
     },
     naverLoginCallback
   )
