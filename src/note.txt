@@ -1011,3 +1011,4 @@ MONGO_URL="mongodb+srv://wetubeadmin:<PASSWORD>/PASSWORD>!@wetube-imi4v.mongodb.
 MONGO_URL_PROD="mongodb+srv://wetubeadmin:<PASSWORD>@wetube-imi4v.mongodb.net/test?retryWrites=true&w=majority"
 
 저장됨?
+아..
