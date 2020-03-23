@@ -1010,4 +1010,6 @@ mongodb를 내 컴퓨터가 아닌 다른 서버에서 가져오고싶을때
 MONGO_URL="mongodb+srv://wetubeadmin:<PASSWORD>/PASSWORD>!@wetube-imi4v.mongodb.net/test?retryWrites=true&w=majority"
 MONGO_URL_PROD="mongodb+srv://wetubeadmin:<PASSWORD>@wetube-imi4v.mongodb.net/test?retryWrites=true&w=majority"
 
+git push heroku master
+
 https://calm-brook-48026.herokuapp.com/
