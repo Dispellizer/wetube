@@ -108,5 +108,5 @@ dist
 package-lock.json
 uploads
 static
-bulid
+bulid/
 node_modules/
