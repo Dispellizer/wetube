@@ -7,6 +7,7 @@ import passport from "passport";
 import mongoose from "mongoose";
 import session from "express-session";
 import path from "path";
+import flash from "express-flash";
 import MongoStore from "connect-mongo";
 import { localsMiddleWare } from "./middlewares";
 import routes from "./routes";
@@ -41,6 +42,8 @@ app.use(
     // 이 쿠키 저장소에 저장, 이 저장소를 mongo와 연결시켜줘야함
   })
 );
+app.use(flash());
+
 app.use(passport.initialize());
 // passport 초기화
 // initialize 해두면 user 의 정보가 req.user 에 실린다

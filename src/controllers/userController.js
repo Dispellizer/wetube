@@ -11,6 +11,7 @@ export const postJoin = async (req, res, next) => {
     body: { name, email, password, password2 }
   } = req;
   if (password !== password2) {
+    req.flash("error", "Passwords dont match");
     res.status(400);
     res.render("join", { pageTitle: "Join" });
   } else {
@@ -39,11 +40,16 @@ export const postLogin = passport.authenticate("local", {
   // "local"은 우리가 설치해준 Strategy의 이름이다
   failureRedirect: routes.login,
   // 로그인 하는데 실패하면 로그인으로
-  successRedirect: routes.home
+  successRedirect: routes.home,
   // 로그인 성공시 홈으로
+  successFlash: "Welcome",
+  failureFlash: "Can't log in. Check email and/or password"
 });
 
-export const githubLogin = passport.authenticate("github");
+export const githubLogin = passport.authenticate("github", {
+  successFlash: "Welcome",
+  failureFlash: "Can't log in at this time"
+});
 // passport의 strategy중 github을 이용
 
 export const githubLoginCallback = async (_, __, profile, cb) => {
@@ -86,7 +92,10 @@ export const postNaverLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const naverLogin = passport.authenticate("naver");
+export const naverLogin = passport.authenticate("naver", {
+  successFlash: "Welcome",
+  failureFlash: "Can't log in at this time"
+});
 
 export const naverLoginCallback = async (_, __, profile, cb) => {
   const {
@@ -112,6 +121,7 @@ export const naverLoginCallback = async (_, __, profile, cb) => {
 };
 
 export const logout = (req, res) => {
+  req.flash("info", "Logged Out, see you later");
   req.logout();
   // passport를 사용할때 이렇게 하면 로그아웃 된다.
   res.redirect(routes.home);
@@ -134,6 +144,7 @@ export const userDetail = async (req, res) => {
     const user = await User.findById(id).populate("videos");
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
+    req.flash("error", "User not found");
     res.redirect(routes.home);
   }
 };
@@ -153,8 +164,10 @@ export const postEditProfile = async (req, res) => {
       // req.user.avatarUrl은 현재 로그인한 사람의 아바타링크
       // 만약 여기 새로운 avatarfile이 없으면 업데이트 하지 않음
     });
+    req.flash("success", "profile updated");
     res.redirect(routes.me);
   } catch (error) {
+    req.flash("error", "Cant update profile");
     res.redirect(routes.editProfile);
   }
 };
@@ -169,6 +182,7 @@ export const postChangePassword = async (req, res) => {
   } = req;
   try {
     if (newPassword !== newPassword1) {
+      req.flash("error", "Password don't match");
       res.status(400);
       // 상태코드400을 안주면 브라우저는 성공적인걸로 알아서 크롬기준 비번을 저장하라고뜸
       res.redirect(`/users/${routes.changePassword}`);
@@ -178,6 +192,7 @@ export const postChangePassword = async (req, res) => {
     // changePassword는 passport-local-mongoose에서 제공해주는것
     res.redirect(routes.me);
   } catch (error) {
+    req.flash("error", "Can't change password");
     res.status(400);
     res.redirect(`/users/${routes.changePassword}`);
   }
